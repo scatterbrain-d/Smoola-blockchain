@@ -1,5 +1,5 @@
-## $moola
-# The hottest new cryptocurrency!
+# $moola
+## The hottest new cryptocurrency!
 
 This app contains a functioning cryptocurrency based on blockchain architecture.
 Features include:
