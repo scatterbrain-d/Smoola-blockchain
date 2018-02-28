@@ -1,11 +1,11 @@
 const Blockchain = require('./index');
-const Block = require('./block');
+const Block      = require('./block');
 
 describe('Blockchain', () => {
   let bc, bc2;
   
   beforeEach(() => {
-    bc = new Blockchain();
+    bc  = new Blockchain();
     bc2 = new Blockchain();
   });
   

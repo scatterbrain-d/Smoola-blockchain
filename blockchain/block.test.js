@@ -5,9 +5,9 @@ describe('Block', () => {
   let data, block, lastBlock;
   
   beforeEach(() => {
-    data = 'fakeblock';
     lastBlock = Block.genesis();
-    block = Block.mineBlock(lastBlock, data);
+    data      = 'fakeblock';
+    block     = Block.mineBlock(lastBlock, data);
   });
   
   

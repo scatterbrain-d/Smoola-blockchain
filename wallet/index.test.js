@@ -1,27 +1,29 @@
-const Wallet = require('./index');
-const TransactionPool = require('./transaction-pool');
-const Blockchain = require('../blockchain');
 const {INITIAL_BALANCE} = require('../config');
+const TransactionPool   = require('./transaction-pool');
+const Blockchain        = require('../blockchain');
+const Wallet            = require('./index');
+
 
 describe('Wallet', () => {
   let wallet, tPool, bc;
   
   beforeEach(() => {
     wallet = new Wallet();
-    tPool = new TransactionPool();
-    bc = new Blockchain();
+    tPool  = new TransactionPool();
+    bc     = new Blockchain();
   });
   
   describe('creating a transaction', () => {
     let transaction, sendAmount, recipient;
     
     beforeEach(() => {
-      sendAmount = 80;
-      recipient = 'yomama';
+      sendAmount  = 80;
+      recipient   = 'yomama';
       transaction = wallet.createTransaction(recipient, sendAmount, bc, tPool);
     });
     
-    //testing same transaction carried out twice to ensure proper updating
+//      **** CREATETRANSACTION UPDATING TRANSACTIONS ****
+
     describe('then doing the same transaction again', () => {
       
       beforeEach(() => {
@@ -40,12 +42,14 @@ describe('Wallet', () => {
     });
   });
   
+//                         **** CALCULATEBALANCE ****  
+  
   describe('calculating the balance', () => {
     let addBalance, repeatAdd, senderWallet;
     beforeEach(() => {
       senderWallet = new Wallet();
-      addBalance = 99;
-      repeatAdd = 3;
+      addBalance   = 99;
+      repeatAdd    = 3;
       for(let i = 0; i < repeatAdd; i++) {
         senderWallet.createTransaction(wallet.publicKey, addBalance, bc, tPool);
       }

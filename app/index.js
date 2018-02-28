@@ -32,13 +32,16 @@ app.get('/blocks', (req, res) => {
   res.json(bc.chain);
 });
 
+
 app.get('/transactions', (req, res) => {
   res.json(tPool.transactions);
 });
 
+
 app.get('./public-key', (req, res) => {
   res.json({publicKey: wallet.publicKey});
 });
+
 
 app.get('./mine-transactions', (req, res) => {
   const block = miner.mine();
@@ -64,6 +67,7 @@ app.post('/transact', (req, res) => {
   res.redirect('/transactions');
 });
 
+
 app.post('/mine', (req, res) => {
   const block = bc.addBlock(req.body.data);
   console.log(`new block added: ${block.toString()}`);
@@ -71,8 +75,10 @@ app.post('/mine', (req, res) => {
   res.redirect('/blocks');
 });
 
+
 app.listen(HTTP_PORT, () => {
   console.log(`Blockchain server running`);
 });
+
 
 p2pServer.listen();

@@ -23,12 +23,14 @@ class P2pServer {
     this.sockets = [];
   }
   
+  
   listen() {
     const server = new Websocket.Server({port: P2P_PORT});
     server.on('connection', socket => this.connectSocket(socket));
     this.connectToPeers();
     console.log(`Listening for peer-to-peer connections on ${P2P_PORT}`);
   }
+  
   
   connectSocket(socket) {
     this.sockets.push(socket);
@@ -37,12 +39,14 @@ class P2pServer {
     this.sendChain(socket);
   }
   
+  
   connectToPeers() {
     peers.forEach(peer => {
       const socket = new Websocket(peer);
       socket.on('open', this.connectSocket(socket));
     });
   }
+  
   
   messageHandler(socket) {
     socket.on('message', message => {
@@ -61,12 +65,14 @@ class P2pServer {
     });
   }
   
+  
   sendChain(socket) {
     socket.send(JSON.stringify({
       type: MESSAGE_TYPES.chain,
       chain: this.blockchain.chain
     }));
   }
+  
   
   sendTransaction(socket, transaction) {
     socket.send(JSON.stringify({
@@ -75,13 +81,16 @@ class P2pServer {
     }));
   }
   
+  
   syncChains() {
     this.sockets.forEach(socket => this.sendChain(socket));
   }
   
+  
   broadcastTransaction(transaction) {
     this.sockets.forEach(socket => this.sendTransaction(socket, transaction));
   }
+  
   
   broadcastClearTransactions() {
     this.sockets.forEach(socket => socket.send(JSON.stringify({type: MESSAGE_TYPES.clearTransactions})));
