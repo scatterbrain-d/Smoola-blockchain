@@ -9,14 +9,14 @@ describe('Blockchain', () => {
     bc2 = new Blockchain();
   });
   
+//         **** CONSTRUCTOR ****
   
-  //testing constructor
   it('should start with genesis block', () => {
     expect(bc.chain[0]).toEqual(Block.genesis());
   });
   
+//          **** ADDBLOCK ****
   
-  //testing addBlock function
   it('adds a new block', () => {
     const data = 'new';
     bc.addBlock(data);
@@ -24,8 +24,8 @@ describe('Blockchain', () => {
     expect(bc.chain[bc.chain.length-1].data).toEqual(data);
   });
   
+//         **** ISVALIDCHAIN ****
   
-  //testing isValidChain function
   it('validates a valid chain', () => {
     bc2.addBlock('valid');
     
@@ -45,8 +45,8 @@ describe('Blockchain', () => {
     expect(bc.isValidChain(bc2.chain)).toBe(false);
   });
   
-  
-  //testing replaceChain function
+//           **** REPLACECHAIN ****
+
   it('replaces the chain with a valid chain', () => {
     bc2.addBlock('newBlock');
     bc.replaceChain(bc2.chain);
@@ -61,5 +61,3 @@ describe('Blockchain', () => {
     expect(bc.chain).not.toEqual(bc2.chain);
   });
 });
-
-

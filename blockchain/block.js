@@ -1,5 +1,30 @@
-const ChainUtil = require('../chain-util');
 const {DIFFICULTY, MINE_RATE} = require('../config');
+const ChainUtil               = require('../chain-util');
+
+
+//                        **** BLOCK ****
+//
+//   This class creates and manages the blocks on the blockchain.
+//
+//   * toString - returns block info to command line.
+//
+//   * genesis - creates a new genesis block, which must be used to
+//   start a chain since all other blocks must connect to a preceding
+//   block.
+//
+//   * mineBlock - creates a new block on the chain. Includes proof of work 
+//   algorithm that keeps generating a hash until it meets number of leading 
+//   zeroes specified by DIFFICULTY
+//
+//   * hash - calculation of a block's hash using all other block parameters
+//
+//   * blockhash - deconstructs block data and uses it to make a hash. Used to
+//   compare to existing hash for blockchain validation. If data has been
+//   altered on the block, chain is invalidated.
+//
+//   * adjustDifficulty - dynamically adjusts difficulty of proof of work by 
+//   comparing actual mine rate to desired MINE_RATE
+
 
 class Block {
   constructor(timestamp, lastHash, hash, data, nonce, difficulty){
@@ -11,7 +36,6 @@ class Block {
     this.difficulty = difficulty || DIFFICULTY;
   }
   
-  //returns block info to command line
   toString() {
     return `Block -
     Timestamp: ${this.timestamp}
@@ -22,7 +46,6 @@ class Block {
     Data:      ${this.data}`;
   }
   
-  //creates genesis block. Static so can be used without creating new Block instance
   static genesis() {
     return new this('beginning', 'none', 'let there be block', [], 0, DIFFICULTY);
   }
@@ -32,8 +55,7 @@ class Block {
     let nonce = 0;
     let {difficulty} = lastBlock;
     const lastHash = lastBlock.hash;
-    
-    //proof of work - keeps generating hash until it meets number of leading zeroes specified by DIFFICULTY
+
     do {
       nonce++;
       timestamp = Date.now();
@@ -44,7 +66,7 @@ class Block {
     return new this(timestamp, lastHash, hash, data, nonce, difficulty);
   }
   
-  //calculation of the hash using all other parameters
+  
   static hash(timestamp, lastHash, data, nonce, difficulty) {
     return ChainUtil.hash(`${timestamp}${lastHash}${data}${nonce}${difficulty}`).toString();
   }
@@ -54,7 +76,7 @@ class Block {
     return Block.hash(timestamp, lastHash, data, nonce, difficulty);
   }
   
-  //dynamically adjusts difficulty of proof of work by comparing actual mine rate to desired MINE_RATE
+  
   static adjustDifficulty(lastBlock, currentTime) {
     let {difficulty} = lastBlock;
     difficulty = lastBlock.timestamp + MINE_RATE > currentTime ? difficulty + 1 : difficulty - 1;

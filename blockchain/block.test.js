@@ -4,7 +4,6 @@ describe('Block', () => {
   
   let data, block, lastBlock;
   
-  
   beforeEach(() => {
     data = 'fakeblock';
     lastBlock = Block.genesis();
@@ -12,7 +11,8 @@ describe('Block', () => {
   });
   
   
-  //testing block creation
+  // **** BLOCK CREATION ****
+  
   it('sets the `data` to match the input', () => {
     expect(block.data).toEqual(data);
   });
@@ -22,13 +22,15 @@ describe('Block', () => {
   });
   
   
-  //testing proof of work & nonce
+  // **** PROOF OF WORK & NONCE ****
+  
   it('generates a hash that matches the difficulty', () => {
     expect(block.hash.substring(0, block.difficulty)).toEqual('0'.repeat(block.difficulty));
   });
   
   
-  //testing method to dynamically set difficulty based on mine rate
+  // **** DYNAMIC DIFFICULTY & MINE RATE ****
+  
   it('lowers the difficulty after a slowly mined block', () => {
     expect(Block.adjustDifficulty(block, block.timestamp + 360000)).toEqual(block.difficulty - 1);
   });
