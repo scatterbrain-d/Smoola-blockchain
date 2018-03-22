@@ -16,17 +16,18 @@ const miner     = new Miner(bc, tPool, wallet, p2pServer);
 
 app.use(bodyParser.json());
 
-//                 **** GET ROUTES ****
-//
-//   /blocks - displays the blockchain
-//
-//   /transactions - displays current transactions in the pool 
-//
-//   /public-key - exposes a user's public address
-//
-//   /mine-transactions - adds a block to the blockchain,
-//    clears transactions, and broadcasts the new blockchain
-//    and empty transaction pool to all other users
+/*                 **** GET ROUTES ****
+
+   /blocks - displays the blockchain
+
+   /transactions - displays current transactions in the pool 
+
+   /public-key - exposes a user's public address
+
+   /mine-transactions - adds a block to the blockchain,
+    clears transactions, and broadcasts the new blockchain
+    and empty transaction pool to all other users
+*/
 
 app.get('/blocks', (req, res) => {
   res.json(bc.chain);
@@ -50,15 +51,16 @@ app.get('./mine-transactions', (req, res) => {
 });
 
 
-//               **** POST ROUTES ****
-//
-//   /transact creates a transaction, places it in the pool,
-//    and updates the pool across all connected users
-//
-//   /mine adds a block containing requested data and
-//    syncs the new blockchain over all users (more
-//    generic than /mine-transactions which can only make
-//    blocks that store cyptocurrency transactions)
+/*               **** POST ROUTES ****
+
+   /transact creates a transaction, places it in the pool,
+    and updates the pool across all connected users
+
+   /mine adds a block containing requested data and
+    syncs the new blockchain over all users (more
+    generic than /mine-transactions which can only make
+    blocks that store cyptocurrency transactions)
+*/
 
 app.post('/transact', (req, res) => {
   const {recipient, amount} = req.body;

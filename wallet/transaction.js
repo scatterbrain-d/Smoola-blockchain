@@ -1,28 +1,29 @@
 const {MINING_REWARD} = require('../config');
 const Utility         = require('../utility');
 
-//                                **** TRANSACTION ****
-// 
-//    This class deals with generating, updating, signing, and verifying
-//    cryptocurrency transactions.
-// 
-//    * update - edits an existing transaction with additional details, adjusting
-//    sender balance and adding a new recipient accordingly. Then generates a new
-//    signature since the old one becomes invalid the moment the payload changes.
-//
-//    * transactionHelper - when given outputs and the sender's wallet, creates a
-//    transaction and signs it. Reduces redundancy in newTransaction and rewardTransaction.
-// 
-//    * newTransaction - checks to ensure sender can afford it, then creates
-//    transaction. For use in peer to peer transactions.
-//
-//    * rewardTransaction - rewards miners with transaction from the blockchain wallet.
-//
-//    * signTransaction - uses cryptography in ChainUtil and data within transaction
-//    along with user's credentials to generate a secure signature for a transaction.
-//
-//    * verifyTransaction - uses cryptography in ChainUtil to verify transaction based
-//    on its contents.
+/*                                **** TRANSACTION ****
+ 
+    This class deals with generating, updating, signing, and verifying
+    cryptocurrency transactions.
+ 
+    * update - edits an existing transaction with additional details, adjusting
+    sender balance and adding a new recipient accordingly. Then generates a new
+    signature since the old one becomes invalid the moment the payload changes.
+
+    * transactionHelper - when given outputs and the sender's wallet, creates a
+    transaction and signs it. Reduces redundancy in newTransaction and rewardTransaction.
+ 
+    * newTransaction - checks to ensure sender can afford it, then creates
+    transaction. For use in peer to peer transactions.
+
+    * rewardTransaction - rewards miners with transaction from the blockchain wallet.
+
+    * signTransaction - uses cryptography in ChainUtil and data within transaction
+    along with user's credentials to generate a secure signature for a transaction.
+
+    * verifyTransaction - uses cryptography in ChainUtil to verify transaction based
+    on its contents.
+*/
 
 
 class Transaction {
@@ -55,7 +56,6 @@ class Transaction {
   
   
   static newTransaction(senderWallet, recipient, amount) {
-    const transaction = new this();
     if(amount > senderWallet.balance) {
       console.log(`Amount (${amount}) exceeds balance.`);
       return;

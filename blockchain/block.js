@@ -2,29 +2,29 @@ const {DIFFICULTY, MINE_RATE} = require('../config');
 const Utility                 = require('../utility');
 
 
-//                        **** BLOCK ****
-//
-//   This class creates and manages the blocks on the blockchain.
-//
-//   * toString - returns block info to command line.
-//
-//   * genesis - creates a new genesis block, which must be used to
-//   start a chain since all other blocks must connect to a preceding
-//   block.
-//
-//   * mineBlock - creates a new block on the chain. Includes proof of work 
-//   algorithm that keeps generating a hash until it meets number of leading 
-//   zeroes specified by DIFFICULTY
-//
-//   * hash - calculation of a block's hash using all other block parameters
-//
-//   * blockhash - deconstructs block data and uses it to make a hash. Used to
-//   compare to existing hash for blockchain validation. If data has been
-//   altered on the block, chain is invalidated.
-//
-//   * adjustDifficulty - dynamically adjusts difficulty of proof of work by 
-//   comparing actual mine rate to desired MINE_RATE
+/*                        **** BLOCK ****
 
+   This class creates and manages the blocks on the blockchain.
+
+   * toString - returns block info to command line.
+
+   * genesis - creates a new genesis block, which must be used to
+   start a chain since all other blocks must connect to a preceding
+   block.
+
+   * mineBlock - creates a new block on the chain. Includes proof of work 
+   algorithm that keeps generating a hash until it meets number of leading 
+   zeroes specified by DIFFICULTY
+
+   * hash - calculation of a block's hash using all other block parameters
+
+   * blockhash - deconstructs block data and uses it to make a hash. Used to
+   compare to existing hash for blockchain validation. If data has been
+   altered on the block, chain is invalidated.
+
+   * adjustDifficulty - dynamically adjusts difficulty of proof of work by 
+   comparing actual mine rate to desired MINE_RATE
+*/
 
 class Block {
   constructor(timestamp, lastHash, hash, data, nonce, difficulty){

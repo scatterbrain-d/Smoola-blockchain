@@ -9,12 +9,13 @@ const MESSAGE_TYPES = {
 
 
 
-//            **** PEER-TO-PEER SERVER ****
-//   This class uses Websockets to create a p2p network
-//   that allows multiple users to interact with each other
-//   by sending transactions and syncing the most recent 
-//   versions of the blockchain and transaction pool
-//   across all users.
+/*            **** PEER-TO-PEER SERVER ****
+   This class uses Websockets to create a p2p network
+   that allows multiple users to interact with each other
+   by sending transactions and syncing the most recent 
+   versions of the blockchain and transaction pool
+   across all users.
+*/
 
 class P2pServer {
   constructor(blockchain, transactionPool) {
