@@ -18,10 +18,10 @@ const Utility         = require('../utility');
 
     * rewardTransaction - rewards miners with transaction from the blockchain wallet.
 
-    * signTransaction - uses cryptography in ChainUtil and data within transaction
+    * signTransaction - uses cryptography in Utility and data within transaction
     along with user's credentials to generate a secure signature for a transaction.
 
-    * verifyTransaction - uses cryptography in ChainUtil to verify transaction based
+    * verifyTransaction - uses cryptography in Utility to verify transaction based
     on its contents.
 */
 
